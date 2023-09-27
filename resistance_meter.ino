@@ -13,7 +13,7 @@ float R1 = 0.99;  // значение известного сопротивле�
 float R2 = 0;    // значение неизвестного сопротивления
 float buffer;
 int a2d_data = 0;
-
+float current_time = 0.0;
 
 void setup() {
   pinMode(A0, INPUT);
@@ -33,16 +33,20 @@ void loop() {
   Vout = (buffer) / 1024.0;
   buffer = Vout / (Vin - Vout);
   R2 = R1 * buffer;
-  //Serial.print(Vout);
-  //Serial.print(" ");
 
+
+  current_time = millis() * 0.001;
+  Serial.print(current_time);
+  Serial.print(" ");
+
+  
   //Serial.print("\t R: ");
   if (R2 > 40) {
     Serial.println("inf");
   } else {
     Serial.println(R2);
   }
-  //delay(1000);
+  //delay(50);
 /* //this is for filter adjustment
   Serial.print(a2d_data);
   Serial.print(" ");
